@@ -6,11 +6,8 @@ module.exports = {
   },
   module: {
     loaders: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader'
-      }
+      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
+      { test: /\.scss$/, loaders: ['style-loader', 'css-loader', 'sass-loader'] }
     ]
   },
   resolve: {
