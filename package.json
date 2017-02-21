@@ -31,7 +31,9 @@
     "redux": "^3.6.0",
     "sass-loader": "^6.0.0",
     "serve-favicon": "~2.3.0",
+    "socket.io": "^1.7.2",
     "style-loader": "^0.13.1",
+    "twitter": "^1.7.0",
     "webpack": "^2.2.1"
   },
   "devDependencies": {
