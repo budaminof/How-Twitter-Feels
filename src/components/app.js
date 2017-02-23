@@ -1,60 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import io from 'socket.io-client';
-import { newTweet, newSearch } from '../actions/index';
-
-const socket = io.connect();
+import Tweet from './tweet';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      tweet: '',
-    }
-  }
-
-  componentDidMount() {
-    socket.on('newTweet', (tweet) => {
-      this.props.dispatch(newTweet(tweet.text));
-      console.log('message: ', tweet.text);
-    });
-
-    socket.on('error', (err) => {
-      console.log("################################################");
-      console.log(err);
-    })
-  }
-
-  onInputChange(event) {
-    event.preventDefault();
-    this.props.dispatch(newSearch());
-    socket.emit('stop');
-    console.log("submit", this.state.tweet );
-    socket.emit('newSearch', this.state.tweet);
-  }
-
-  changeTweet(event) {
-    this.setState({ tweet: event.target.value });
-  }
 
   render() {
     return (
-      <div>
-        <h1>Hello World</h1>
-        <form onSubmit={ (event) => this.onInputChange(event) } >
-          <input type="text" onChange={ (event) => this.changeTweet(event) }/>
-          <input type="submit" />
-        </form>
-      </div>
+      <main>
+        <Tweet />
+      </main>
     )
   }
 }
 
 function mapStateToProps(state) {
-  const { tweets } = state;
-  console.log("map:", state);
-  return { tweets };
+  return state;
 }
 
 export default connect(mapStateToProps)(App);

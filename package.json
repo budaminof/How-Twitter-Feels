@@ -34,6 +34,7 @@
     "socket.io": "^1.7.2",
     "style-loader": "^0.13.1",
     "twitter": "^1.7.0",
+    "watson-developer-cloud": "^2.21.1",
     "webpack": "^2.2.1"
   },
   "devDependencies": {
