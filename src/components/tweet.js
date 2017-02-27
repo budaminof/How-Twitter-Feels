@@ -15,9 +15,9 @@ class Tweet extends Component {
   }
 
   componentDidMount() {
-    socket.on('newTweet', (tweet) => {
-      this.props.dispatch(newTweet(tweet.text));
-      console.log('message: ', tweet.text);
+    socket.on('newTweet', (data) => {
+      this.props.dispatch(newTweet(data));
+      console.log('message: ', data);
     });
 
     socket.on('error', (err) => {
