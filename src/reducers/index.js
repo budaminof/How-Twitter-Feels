@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import search from '../reducers/search';
+import data from '../reducers/data';
+import tweets from '../reducers/tweets';
 
 const rootReducer = combineReducers({
-    search
+    data,
+    tweets
 });
 
 export default rootReducer;

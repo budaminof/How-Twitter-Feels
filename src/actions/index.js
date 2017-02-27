@@ -7,3 +7,7 @@ export function newTweet(tweet) {
 export function newSearch() {
  return { type: types.SEARCH_TERM };
 }
+
+export function newData(data) {
+  return { type: types.NEW_DATA, data };
+}

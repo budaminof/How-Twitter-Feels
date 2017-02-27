@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import Tweet from './tweet';
+import Search from './search';
+import TweetsList from '../containers/tweetsListContainer';
+import Data from '../containers/dataContainer';
 
 class App extends Component {
 
   render() {
     return (
       <main>
-        <Tweet />
+        <Search />
+        <TweetsList />
+        <Data />
       </main>
     )
   }
 }
 
-function mapStateToProps(state) {
-  return state;
-}
-
-export default connect(mapStateToProps)(App);
+export default App;

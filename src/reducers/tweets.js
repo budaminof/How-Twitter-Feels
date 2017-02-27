@@ -4,7 +4,7 @@ const initialState = {
   tweets: [],
 }
 
-export default function search(state = initialState, action) {
+export default function tweets(state = initialState, action) {
   switch (action.type) {
     case types.NEW_TWEET:
       return {...state, tweets: [action.tweet, ...state.tweets]};
