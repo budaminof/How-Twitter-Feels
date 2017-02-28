@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Search from './search';
 import TweetsList from '../containers/tweetsListContainer';
-import Data from '../containers/dataContainer';
 
 class App extends Component {
 
@@ -10,7 +9,6 @@ class App extends Component {
       <main>
         <Search />
         <TweetsList />
-        <Data />
       </main>
     )
   }
