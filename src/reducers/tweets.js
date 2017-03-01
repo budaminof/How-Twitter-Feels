@@ -2,6 +2,7 @@ import * as types from '../constants/ActionTypes';
 
 const initialState = {
   tweets: [],
+  showData: false
 }
 
 export default function tweets(state = initialState, action) {
@@ -11,7 +12,12 @@ export default function tweets(state = initialState, action) {
         tweets: [action.tweet, ...state.tweets]
       };
     case types.SEARCH_TERM:
-      return {...state, tweets: []};
+      return {...state,
+        tweets: [],
+        showData: false,
+      };
+    case types.NEW_DATA:
+      return {...state, showData: true};
     default:
       return state;
   }

@@ -13,10 +13,10 @@ const client = new Twitter({
 });
 
 const tone_analyzer = watson.tone_analyzer({
-  username: '64d804ba-fb66-46cb-aa11-5c7f5d765877',
-  password: '7YPoxIjCIqI5',
-  version: 'v3',
-  version_date: '2016-05-19 '
+  username: config.username,
+  password: config.password,
+  version: config.version,
+  version_date: config.version_date
 });
 
 let hashtags;
@@ -30,21 +30,21 @@ io.on('connection', (socket) => {
       stream = client.stream('statuses/filter', {track: hashtags});
 
       stream.on('data', (tweet) => {
+        io.emit('newTweet', tweet);
         tone_analyzer.tone({ text: tweet.text },
           function(err, tone) {
             if (err) console.log(err);
             else {
-              io.emit('newTweet',
-              JSON.stringify(tone.document_tone.tone_categories[0], null, 2));
+              io.emit('newData',
+              tone.document_tone.tone_categories[0]);
             }
         });
-        // console.log(JSON.stringify(tone, null, 2));
-        // io.emit('newTweet', tweet);
       });
 
       stream.on('error', (error) => {
         console.log('ERROR:', error);
       });
+      
     }
   });
 
