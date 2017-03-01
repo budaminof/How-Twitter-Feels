@@ -25,7 +25,7 @@ class TweetsList extends Component {
   render() {
 
     return (
-      <div className="tweets">
+      <div className="tweetsContainer">
         <Tweets
           tweets={this.props.tweets}
         />

@@ -1,0 +1,31 @@
+@import "colors";
+
+.search {
+  text-align: center;
+  height: 30px;
+  input[type="text"] {
+    outline: none;
+    box-shadow: none;
+    border: none;
+    border-bottom: 1px solid $extraColor;
+    transition: all 0.5s ease;
+    margin-right: 20px;
+    font-size: 30px;
+    text-align: center;
+  }
+  input[type="text"]:focus {
+    border-bottom: 2px solid $extraColor;
+    transition: all 0.5s ease;
+  }
+
+  input[type="submit"] {
+    outline: none;
+    box-shadow: none;
+    border: none;
+    text-transform: uppercase;
+    font-size: 15px;
+    padding: 5px 15px;
+    font-family: 'Raleway', sans-serif;
+    background-color: $orange;
+  }
+}

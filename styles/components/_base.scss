@@ -1,3 +1,26 @@
-h1 {
-  color: green;
+@import "colors";
+
+html {
+  font-family: 'Raleway', sans-serif;
+  color: $black;
+}
+
+main {
+  margin: 50px;
+  h1 {
+    font-size: 54px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    span {
+      color: $extraColor;
+    }
+  }
+}
+
+.tweetsContainer {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
 }

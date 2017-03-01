@@ -27,11 +27,10 @@ class Search extends Component {
 
   render() {
     return (
-      <div>
-        <h2>Hello World How Are You Feeling Today?</h2>
+      <div className="search">
         <form onSubmit={ (event) => this.submitNewTweet(event) } >
           <input type="text" onChange={ (event) => this.onInputChange(event) }/>
-          <input type="submit" />
+          <input type="submit" value="search"/>
         </form>
       </div>
     )
