@@ -44,7 +44,7 @@ io.on('connection', (socket) => {
       stream.on('error', (error) => {
         console.log('ERROR:', error);
       });
-      
+
     }
   });
 

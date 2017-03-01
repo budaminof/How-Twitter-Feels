@@ -13,6 +13,8 @@ class TweetsList extends Component {
   }
 
   componentDidMount() {
+    window.addEventListener("beforeunload", this.onUnload);
+
     socket.on('newTweet', (data) => {
       this.props.dispatch(newTweet(data));
     });
@@ -21,6 +23,14 @@ class TweetsList extends Component {
       this.props.dispatch(newData(data));
     });
   }
+
+    onUnload(event) {
+      // socket.emit('stop');
+    }
+
+    componentWillUnmount() {
+      window.removeEventListener("beforeunload", this.onUnload);
+    }
 
   render() {
 

@@ -16,7 +16,7 @@ class Data extends Component {
       return item.tones.map(tone => {
         return tone.score
       })
-    })
+    });
 
     for (let i = 0; i < dataScore[0].length; i++) {
       let current = 0;
@@ -40,12 +40,12 @@ class Data extends Component {
         datasets: [
           {
             label: "How are we feeling",
-            backgroundColor: "rgba(33, 52, 218, 0.2)",
-            borderColor: "rgba(31, 37, 85, 1)",
-            pointBackgroundColor: "rgba(80, 28, 121, 1)",
+            backgroundColor: "rgba(158, 206, 255, 0.2)",
+            borderColor: "rgba(158, 206, 255, 1)",
+            pointBackgroundColor: "rgb(255, 165, 60)",
             pointBorderColor: "#fff",
             pointHoverBackgroundColor: "#fff",
-            pointHoverBorderColor: "rgba(171, 170, 73, 1)",
+            pointHoverBorderColor: "rgb(255, 165, 60)",
             data: newData.data
           }
         ]
@@ -55,18 +55,26 @@ class Data extends Component {
       legend: {
         display: false
         },
-     tooltips: {
+      tooltips: {
        enabled: false
-     }
+      },
+      scale: {
+        pointLabels: {
+          fontSize: 20,
+          fontColor: "rgb(51, 51, 51)",
+          fontFamily: "Raleway",
+          fontWeight: "lighter"
+        }
+      }
     }
 
     return (
       <div className="data">
-          <Radar
-            id="chart"
-            data={ data }
-            options= { options }
-            />
+        <Radar
+          id="chart"
+          data={ data }
+          options= { options }
+          />
       </div>
     )
   }
