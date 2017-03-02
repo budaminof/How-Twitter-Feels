@@ -1,12 +1,20 @@
 @import "colors";
 
-.waiting {
-    h1 {
+.waitingSearch {
+  position: absolute;
+  left: 450px;
+}
+
+.waiting, .waitingSearch {
+    span {
+      color: $extraColor;
+    }
+    h1, h2 {
     overflow: hidden;
     border-right: .15em solid $orange;
     white-space: nowrap;
     margin: 0 auto;
-    letter-spacing: .15em; 
+    letter-spacing: .15em;
     animation:
       typing 3.5s steps(40, end),
       blink-caret .75s step-end infinite;

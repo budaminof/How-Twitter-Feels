@@ -34,22 +34,22 @@ class Data extends Component {
   }
 
   render() {
-      let newData = this.organizeData(this.props.data);
-      let data = {
-        labels: newData.labels,
-        datasets: [
-          {
-            label: "How are we feeling",
-            backgroundColor: "rgba(158, 206, 255, 0.2)",
-            borderColor: "rgba(158, 206, 255, 1)",
-            pointBackgroundColor: "rgb(255, 165, 60)",
-            pointBorderColor: "#fff",
-            pointHoverBackgroundColor: "#fff",
-            pointHoverBorderColor: "rgb(255, 165, 60)",
-            data: newData.data
-          }
-        ]
-      };
+    let newData = this.organizeData(this.props.data);
+    let data = {
+      labels: newData.labels,
+      datasets: [
+        {
+          label: "How are we feeling",
+          backgroundColor: "rgba(158, 206, 255, 0.2)",
+          borderColor: "rgba(158, 206, 255, 1)",
+          pointBackgroundColor: "rgb(255, 165, 60)",
+          pointBorderColor: "#fff",
+          pointHoverBackgroundColor: "#fff",
+          pointHoverBorderColor: "rgb(255, 165, 60)",
+          data: newData.data
+        }
+      ]
+    };
 
     const options = {
       legend: {

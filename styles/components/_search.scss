@@ -6,31 +6,32 @@
   input[type="text"] {
     outline: none;
     box-shadow: none;
-    border: none;
-    border-bottom: 1px solid $extraColor;
-    transition: all 0.5s ease;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border: 1px solid $extraColor;
     margin-right: 20px;
     font-size: 30px;
     text-align: center;
-  }
-  input[type="text"]:focus {
-    border-bottom: 2px solid $extraColor;
-    transition: all 0.5s ease;
+    color: $black;
   }
 
-  input[type="submit"] {
+   button {
     outline: none;
     box-shadow: none;
     border: none;
     text-transform: uppercase;
-    font-size: 15px;
-    padding: 5px 15px;
+    font-size: 21px;
+    padding: 7px 20px;
+    position: absolute;
+    left: 869px;
+    top: 152px;
     font-family: 'Raleway', sans-serif;
     background-color: $orange;
-    transition: all 0.5s ease;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
   }
-  // input[type="submit"]:hover {
-  //   background-color: $orangeHover;
-  //   transition: all 0.5s ease;
-  // }
+}
+
+.danger {
+  color: red;
 }

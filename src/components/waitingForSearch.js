@@ -8,8 +8,8 @@ class WaitingForSearch extends Component {
   render() {
 
     return (
-      <div className="waiting">
-         <h1>Please type in your search</h1>
+      <div className="waitingSearch">
+         <h2>Type in the <span>word</span> you want to search for</h2>
       </div>
     )
   }
