@@ -36,11 +36,13 @@ class TweetsList extends Component {
 
     return (
       <div className="tweetsContainer">
-        <Tweets tweets={this.props.tweets} />
         {
           this.props.showData ? < Data /> :
-        < Waiting show = { this.props.search } />
+          < Waiting
+            show = { this.props.search }
+            />
         }
+        <Tweets tweets={ this.props.tweets } />
       </div>
     )
   }

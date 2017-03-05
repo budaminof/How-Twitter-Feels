@@ -52,15 +52,14 @@ class Data extends Component {
     };
 
     const options = {
+      responsive: true,
+      // maintainAspectRatio: false,
       legend: {
         display: false
         },
-      tooltips: {
-       enabled: false
-      },
       scale: {
         pointLabels: {
-          fontSize: 20,
+          fontSize: 17,
           fontColor: "rgb(51, 51, 51)",
           fontFamily: "Raleway",
           fontWeight: "lighter"

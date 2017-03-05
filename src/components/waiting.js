@@ -7,7 +7,7 @@ class Waiting extends Component {
   }
 
   render() {
-
+    
     return (
       <div className="waiting">
         { this.props.show ?

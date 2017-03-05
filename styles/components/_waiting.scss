@@ -2,7 +2,11 @@
 
 .waitingSearch {
   position: absolute;
-  left: 450px;
+  left: 500px;
+}
+
+.waiting {
+  // solve to position on this div
 }
 
 .waiting, .waitingSearch {
@@ -31,4 +35,27 @@
     from, to { border-color: transparent }
     50% { border-color: orange; }
     }
+}
+
+
+@media (max-width: 1210px) {
+  .waitingSearch {
+    position: static;
+    width: 420px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 482px) {
+  .waitingSearch {
+    left: 20px;
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 402px) {
+  .waitingSearch {
+    width: 100%;
+    font-size: 12.5px;
+  }
 }

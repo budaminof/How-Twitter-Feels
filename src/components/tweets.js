@@ -6,9 +6,9 @@ class Tweets extends Component {
   }
 
   listOfTweets() {
-    let allTweets = this.props.tweets
+    let allTweets = this.props.tweets;
     let list = allTweets.slice(Math.max(allTweets.length - 10, 1));
-    return list.map(item => <li key={item.id_str}>{item.text}</li> );
+    return list.map(item => <li key={ item.id_str } > { item.text } </li> );
   }
 
   render() {

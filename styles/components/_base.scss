@@ -7,7 +7,7 @@ html {
 
 main {
   margin: 50px;
-  h1 {
+  .title {
     font-size: 54px;
     font-weight: bold;
     text-transform: uppercase;
@@ -18,9 +18,36 @@ main {
   }
 }
 
-.tweetsContainer {
-  margin-top: 50px;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
+@media (max-width:1425px) {
+  main {
+    .title {
+      font-size: 45px;
+    }
+  }
+}
+
+@media (max-width: 1210px) {
+  main {
+    margin: 20px;
+    .title {
+      font-size: 35px;
+      text-align: center;
+    }
+  }
+}
+
+@media (max-width: 482px) {
+  main {
+    margin: 10px;
+  }
+}
+
+@media screen and (max-width: 402px) {
+  main {
+    margin: 5px;
+    .title {
+      text-align: center;
+      font-size: 35px;
+    }
+  }
 }

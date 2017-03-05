@@ -9,7 +9,7 @@ class WaitingForSearch extends Component {
 
     return (
       <div className="waitingSearch">
-         <h2>Type in the <span>word</span> you want to search for</h2>
+         <h2>Type in a <span>word</span> to search for</h2>
       </div>
     )
   }

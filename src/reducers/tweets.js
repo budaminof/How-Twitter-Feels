@@ -16,7 +16,7 @@ export default function tweets(state = initialState, action) {
       return {...state,
         tweets: [],
         showData: false,
-        search: true,
+        search: true
       };
     case types.NEW_DATA:
       return {...state, showData: true};

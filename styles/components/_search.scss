@@ -1,15 +1,23 @@
 @import "colors";
 
 .search {
-  text-align: center;
-  height: 30px;
+  width: 400px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+
+  input,
+  button {
+    float: left;
+  }
+  // height: 30px;
+  padding-bottom: 20px;
+
   input[type="text"] {
     outline: none;
     box-shadow: none;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     border: 1px solid $extraColor;
-    margin-right: 20px;
     font-size: 30px;
     text-align: center;
     color: $black;
@@ -19,19 +27,39 @@
     outline: none;
     box-shadow: none;
     border: none;
-    text-transform: uppercase;
     font-size: 21px;
     padding: 7px 20px;
-    position: absolute;
-    left: 869px;
-    top: 152px;
     font-family: 'Raleway', sans-serif;
     background-color: $orange;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
   }
+
 }
 
 .danger {
-  color: red;
+  text-align: center;
+  color: $red;
+}
+
+@media screen and (max-width: 402px) {
+  .search {
+    width: 100%;
+    margin-bottom: 70px;
+
+    input[type="text"] {
+      font-size: 23px;
+    }
+    button {
+      font-size: 21px;
+      margin-left: -4px;
+      padding: 8px 20px;
+    }
+    .danger {
+      left: 10px;
+      text-align: center;
+      font-size: 20px;
+    }
+  }
+
 }

@@ -19,9 +19,9 @@ const warn = values => {
 const renderField = ({ input, label, type,
     meta: { touched, error, warning } }) => (
       <div>
-        <input {...input} type={type} />
         {touched && ((error && <p className="danger">{error}</p>) ||
         (warning && <p>{warning}</p>))}
+        <input {...input} type={type} />
       </div>
   );
 

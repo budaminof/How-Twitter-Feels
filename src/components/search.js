@@ -9,7 +9,6 @@ const socket = io.connect();
 class Search extends Component {
 
   handleSubmit = (values) => {
-    console.log('SUBMIT',values);
     this.props.dispatch(newSearch());
     socket.emit('stop');
     socket.emit('newSearch', values.term );
