@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import io from 'socket.io-client';
-import { newTweet, newData } from '../actions/index';
+import { newTweet, newData, error } from '../actions/index';
 import Tweets from '../components/tweets';
 import Waiting from '../components/waiting';
 import Data from '../containers/dataContainer';
@@ -22,6 +22,10 @@ class TweetsList extends Component {
     socket.on('newData', (data) => {
       this.props.dispatch(newData(data));
     });
+
+    socket.on('error', () => {
+      this.props.dispatch(error());
+    });
   }
 
     onUnload(event) {
@@ -37,9 +41,12 @@ class TweetsList extends Component {
     return (
       <div className="tweetsContainer">
         {
-          this.props.showData ? < Data /> :
-          < Waiting
-            show = { this.props.search }
+          this.props.showData ?
+          <Data />
+          :
+          <Waiting
+            error = { this.props.error }
+            show = { this.props.showData } 
             />
         }
         <Tweets tweets={ this.props.tweets } />

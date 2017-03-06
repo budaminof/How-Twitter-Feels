@@ -11,3 +11,7 @@ export function newSearch() {
 export function newData(data) {
   return { type: types.NEW_DATA, data };
 }
+
+export function error() {
+  return { type: types.ERROR };
+}

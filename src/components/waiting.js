@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import WaitingForSearch from './WaitingForSearch';
 
 class Waiting extends Component {
   constructor(props) {
@@ -9,11 +8,16 @@ class Waiting extends Component {
   render() {
 
     return (
-      <div className="waiting">
-        { this.props.show ?
-          <h2>Waiting for data...</h2>
-         : <WaitingForSearch />
-        }
+      <div>
+        <div className="waiting">
+          { this.props.show ? <h2>Waiting for data...</h2> : null }
+        </div>
+        <div className="error">
+        { this.props.error ?
+          <h2 >Sorry, we are experiencing some overflow,
+            please try again in a few minutes</h2>
+          : null }
+        </div>
       </div>
     )
   }

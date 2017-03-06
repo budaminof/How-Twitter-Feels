@@ -42,10 +42,10 @@ io.on('connection', (socket) => {
       });
 
       stream.on('error', (error) => {
-        console.log('ERROR:', error);
+        io.emit('error');
       });
 
-    }
+    // }
     // const a = {
     //   text: 'how is this possible????how is this possible????'
     // }
@@ -75,6 +75,7 @@ io.on('connection', (socket) => {
     //           tone.document_tone.tone_categories[0]);
     //         }
     //     });
+
   });
 
   socket.on('stop', () => {

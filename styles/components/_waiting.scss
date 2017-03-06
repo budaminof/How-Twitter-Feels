@@ -29,12 +29,21 @@
   /* The typewriter cursor effect */
   @keyframes blink-caret {
     from, to { border-color: transparent }
-    50% { border-color: orange; }
+    50% { border-color: $orange; }
     }
 }
 
+.error {
+  position: absolute;
+  color: $orange;
+  text-align: center;
+  width: 100%;
+}
 
 @media (max-width: 1210px) {
+  .error {
+    position: relative;
+  }
   .waitingSearch {
     position: static;
     width: 420px;

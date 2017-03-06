@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import io from 'socket.io-client';
 import SearchForm from './searchForm';
 import { newSearch } from '../actions/index';
+import WaitingForSearch from './WaitingForSearch';
 
 const socket = io.connect();
 
@@ -16,9 +17,20 @@ class Search extends Component {
 
   render() {
     return (
-      <SearchForm onSubmit={this.handleSubmit} />
+      <div>
+        <SearchForm onSubmit={this.handleSubmit} />
+        {
+          this.props.newSearch ?
+          null :
+          <WaitingForSearch />
+        }
+
+      </div>
     );
   }
 }
 
-export default connect(null)(Search);
+function mapStateToProps(state) {
+  return state.data;
+}
+export default connect(mapStateToProps)(Search);
