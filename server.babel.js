@@ -1,22 +1,23 @@
 const app = require('./app.babel');
+const dotenv = require('dotenv');
+dotenv.load();
 const Twitter = require('twitter');
-const config = require('./_config');
 const watson = require('watson-developer-cloud');
 const server = app.listen(process.env.PORT || 3000);
 const io = require('socket.io')(server);
 
 const client = new Twitter({
-  consumer_key: config.consumer_key,
-  consumer_secret: config.consumer_secret,
-  access_token_key: config.access_token_key,
-  access_token_secret: config.access_token_secret
+  consumer_key: process.env.CONSUMER_KEY,
+  consumer_secret: process.env.CONSUMER_SECRET,
+  access_token_key: process.env.ACCESS_TOKEN_KEY,
+  access_token_secret: process.env.ACCESS_TOKEN_SECRET
 });
 
 const tone_analyzer = watson.tone_analyzer({
-  username: config.username,
-  password: config.password,
-  version: config.version,
-  version_date: config.version_date
+  username: process.env.USERNAME,
+  password: process.env.PASSWORD,
+  version: process.env.VERSION,
+  version_date: process.env.VERSION_DATE
 });
 
 let hashtags;
@@ -26,6 +27,7 @@ io.on('connection', (socket) => {
 
   socket.on('newSearch', (newSearchWord) => {
     hashtags = `#${newSearchWord}`;
+
     if (hashtags) {
       stream = client.stream('statuses/filter', {track: hashtags});
 
@@ -45,7 +47,7 @@ io.on('connection', (socket) => {
         io.emit('error');
       });
 
-    // }
+    }
     // const a = {
     //   text: 'how is this possible????how is this possible????'
     // }
@@ -61,7 +63,7 @@ io.on('connection', (socket) => {
     // const e = {
     //   text: 'how i98798798798779798789789797878789787ible????'
     // }
-    //
+
     // tone_analyzer.tone({ text: 'how is this possible????' },
     //       function(err, tone) {
     //         if (err) console.log(err);

@@ -45,8 +45,8 @@ class TweetsList extends Component {
           <Data />
           :
           <Waiting
-            error = { this.props.error }
-            show = { this.props.showData } 
+            error={ this.props.error }
+            show={ this.props.showWaiting }
             />
         }
         <Tweets tweets={ this.props.tweets } />

@@ -1,8 +1,10 @@
+var path = require('path');
+
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: './public',
-    filename: 'bundle.js'
+    path: path.join(__dirname, 'public'),
+    filename: 'bundle.js',
   },
   module: {
     noParse: [/\.ws$/],
@@ -17,5 +19,5 @@ module.exports = {
   externals: ['fs','ws'],
   resolve: {
     extensions: ['.js', '.json']
-  }
+  },
 };
