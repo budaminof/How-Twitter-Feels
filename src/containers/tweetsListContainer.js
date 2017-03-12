@@ -29,7 +29,7 @@ class TweetsList extends Component {
   }
 
     onUnload(event) {
-      // socket.emit('stop');
+      socket.emit('stop');
     }
 
     componentWillUnmount() {

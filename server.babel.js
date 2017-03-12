@@ -46,38 +46,7 @@ io.on('connection', (socket) => {
       stream.on('error', (error) => {
         io.emit('error');
       });
-
     }
-    // const a = {
-    //   text: 'how is this possible????how is this possible????'
-    // }
-    // const b = {
-    //   text: 'gsffffffffffffffffffffffffffffffffffffffffffffffff'
-    // }
-    // const c = {
-    //   text: 'how is this posdkjbv;kdjb;gsjnb;lkfsgmblkmfglkbm?'
-    // }
-    // const d = {
-    //   text: 'h777777777777777777777777777777s this possible????'
-    // }
-    // const e = {
-    //   text: 'how i98798798798779798789789797878789787ible????'
-    // }
-
-    // tone_analyzer.tone({ text: 'how is this possible????' },
-    //       function(err, tone) {
-    //         if (err) console.log(err);
-    //         else {
-    //           io.emit('newTweet', a);
-    //           io.emit('newTweet', b);
-    //           io.emit('newTweet', c);
-    //           io.emit('newTweet', d);
-    //           io.emit('newTweet', e);
-    //           io.emit('newData',
-    //           tone.document_tone.tone_categories[0]);
-    //         }
-    //     });
-
   });
 
   socket.on('stop', () => {
