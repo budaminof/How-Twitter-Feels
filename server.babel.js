@@ -4,7 +4,7 @@ dotenv.load();
 const Twitter = require('twitter');
 const watson = require('watson-developer-cloud');
 const server = app.listen(process.env.PORT || 3000);
-const io = require('socket.io')(server, { forceNew: true });
+const io = require('socket.io')(server);
 
 const client = new Twitter({
   consumer_key: process.env.CONSUMER_KEY,
