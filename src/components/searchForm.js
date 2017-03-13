@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 
 const validate = values => {
   const errors = {}
-  if (!values.term) errors.term = 'Please enter a search term';
+  if (!values.term) errors.term = 'Please enter a word';
   // if (/^$/.test(values.term)) errors.term = 'Search can\'t be empty';
   return errors
 }
