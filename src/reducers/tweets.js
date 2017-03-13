@@ -28,7 +28,11 @@ export default function tweets(state = initialState, action) {
       };
 
     case types.ERROR:
-      return {...state, error: true};
+      return {...state,
+        error: true,
+        showData: false,
+        showWaiting: false
+      };
 
     default:
       return state;
