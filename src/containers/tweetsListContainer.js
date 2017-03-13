@@ -29,6 +29,7 @@ class TweetsList extends Component {
   }
 
     onUnload(event) {
+      console.log("page reload");
       socket.emit('stop');
     }
 

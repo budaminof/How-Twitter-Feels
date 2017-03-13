@@ -54,6 +54,7 @@ io.on('connection', (socket) => {
   })
 
   socket.on('disconnect', () => {
+    if (stream) stream.destroy();
     console.log('user disconnected');
   });
 
