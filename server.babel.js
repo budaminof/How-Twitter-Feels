@@ -27,7 +27,6 @@ io.on('connection', (socket) => {
 
   socket.on('newSearch', (newSearchWord) => {
     hashtags = `#${newSearchWord}`;
-
     if (hashtags) {
       stream = client.stream('statuses/filter', {track: hashtags});
 
