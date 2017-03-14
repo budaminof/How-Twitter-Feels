@@ -31,6 +31,7 @@ npm-debug.log
 
 .env
 public/bundle.js
+.tmp/
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

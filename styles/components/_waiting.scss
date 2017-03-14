@@ -6,7 +6,7 @@
 }
 
 .waiting, .waitingSearch {
-    span {
+    .extra {
       color: $extraColor;
     }
     h1, h2 {
@@ -59,8 +59,25 @@
 }
 
 @media screen and (max-width: 500px) {
-  .waitingSearch {
+  .waitingSearch, .waiting {
     width: 100%;
     font-size: 12.5px;
+  }
+}
+
+@media (min-width: 400px) and (max-width: 480px) {
+  .waitingSearch, .waiting {
+    width: 100%;
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .waitingSearch, .waiting {
+    h1, h2 {
+    .hide {
+      display: none;
+      }
+    }
   }
 }
