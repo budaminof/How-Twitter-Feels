@@ -1,14 +1,11 @@
 @import "colors";
 
-.waitingSearch {
-  position: absolute;
-  left: 500px;
-}
-
 .waiting, .waitingSearch {
     .extra {
       color: $extraColor;
     }
+
+    display: inline-block;
     h1, h2 {
     overflow: hidden;
     border-right: .15em solid $orange;
@@ -43,41 +40,5 @@
 @media (max-width: 1210px) {
   .error {
     position: relative;
-  }
-  .waitingSearch {
-    position: static;
-    width: 420px;
-    margin: 0 auto;
-  }
-}
-
-@media (max-width: 482px) {
-  .waitingSearch {
-    left: 20px;
-    font-size: 16px;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .waitingSearch, .waiting {
-    width: 100%;
-    font-size: 12.5px;
-  }
-}
-
-@media (min-width: 400px) and (max-width: 480px) {
-  .waitingSearch, .waiting {
-    width: 100%;
-    font-size: 16px;
-  }
-}
-
-@media screen and (max-width: 360px) {
-  .waitingSearch, .waiting {
-    h1, h2 {
-    .hide {
-      display: none;
-      }
-    }
   }
 }
