@@ -1,7 +1,7 @@
 @import "colors";
 
 .search {
-  width: 400px;
+  width: 30vw;
   margin: 0 auto;
   margin-bottom: 20px;
   padding-bottom: 60px;
@@ -15,9 +15,9 @@
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     border: 1px solid $extraColor;
-    font-size: 30px;
-    width: 60%;
-    height: 5%;
+    font-size: 1.5vw;
+    width: 70%;
+    height: 4vh;
     text-align: center;
     color: $black;
   }
@@ -26,7 +26,8 @@
     outline: none;
     box-shadow: none;
     border: none;
-    font-size: 21px;
+    font-size: 2vh;
+    height: 4.5vh;
     text-align: center;
     padding: 7px 20px;
     font-family: 'Raleway', sans-serif;
@@ -48,8 +49,7 @@
     margin-bottom: 30px;
     margin-left: 0px;
     input[type="text"] {
-      width: 70%;
-      font-size: 6vw;
+
     }
     button {
       margin-left: 0px;
