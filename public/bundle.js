@@ -12731,6 +12731,7 @@ Object.defineProperty(exports, "__esModule", {
 var SEARCH_TERM = exports.SEARCH_TERM = 'SEARCH_TERM';
 var NEW_TWEET = exports.NEW_TWEET = 'NEW_TWEET';
 var NEW_DATA = exports.NEW_DATA = 'NEW_DATA';
+var ERROR = exports.ERROR = 'ERROR';
 
 /***/ }),
 /* 145 */
@@ -17543,6 +17544,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.newTweet = newTweet;
 exports.newSearch = newSearch;
 exports.newData = newData;
+exports.error = error;
 
 var _ActionTypes = __webpack_require__(144);
 
@@ -17560,6 +17562,10 @@ function newSearch() {
 
 function newData(data) {
   return { type: types.NEW_DATA, data: data };
+}
+
+function error() {
+  return { type: types.ERROR };
 }
 
 /***/ }),
@@ -17597,10 +17603,6 @@ var _react = __webpack_require__(11);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _WaitingForSearch = __webpack_require__(468);
-
-var _WaitingForSearch2 = _interopRequireDefault(_WaitingForSearch);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Waiting = function (_Component) {
@@ -17612,17 +17614,30 @@ var Waiting = function (_Component) {
   }
 
   (0, _createClass3.default)(Waiting, [{
-    key: 'render',
+    key: "render",
     value: function render() {
 
       return _react2.default.createElement(
-        'div',
-        { className: 'waiting' },
-        this.props.show ? _react2.default.createElement(
-          'h1',
-          null,
-          'Waiting for data...'
-        ) : _react2.default.createElement(_WaitingForSearch2.default, null)
+        "div",
+        null,
+        _react2.default.createElement(
+          "div",
+          { className: "waiting" },
+          this.props.show ? _react2.default.createElement(
+            "h2",
+            null,
+            "Waiting for tweets..."
+          ) : null
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "error" },
+          this.props.error ? _react2.default.createElement(
+            "h2",
+            null,
+            "Sorry, we are experiencing some overflow, please try again in a few minutes"
+          ) : null
+        )
       );
     }
   }]);
@@ -35976,10 +35991,9 @@ var WaitingForSearch = function (_Component) {
           "Type in a ",
           _react2.default.createElement(
             "span",
-            null,
+            { className: "extra" },
             "word"
-          ),
-          " to search for"
+          )
         )
       );
     }
@@ -36036,6 +36050,10 @@ var _searchForm2 = _interopRequireDefault(_searchForm);
 
 var _index = __webpack_require__(233);
 
+var _WaitingForSearch = __webpack_require__(468);
+
+var _WaitingForSearch2 = _interopRequireDefault(_WaitingForSearch);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var socket = _socket2.default.connect();
@@ -36064,13 +36082,21 @@ var Search = function (_Component) {
   (0, _createClass3.default)(Search, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(_searchForm2.default, { onSubmit: this.handleSubmit });
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(_searchForm2.default, { onSubmit: this.handleSubmit }),
+        this.props.newSearch ? null : _react2.default.createElement(_WaitingForSearch2.default, null)
+      );
     }
   }]);
   return Search;
 }(_react.Component);
 
-exports.default = (0, _reactRedux.connect)(null)(Search);
+function mapStateToProps(state) {
+  return state.data;
+}
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(Search);
 
 /***/ }),
 /* 470 */
@@ -36117,7 +36143,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var validate = function validate(values) {
   var errors = {};
-  if (!values.term) errors.term = 'Please enter a search term';
+  if (!values.term) errors.term = 'Please enter a word';
   // if (/^$/.test(values.term)) errors.term = 'Search can\'t be empty';
   return errors;
 };
@@ -36491,11 +36517,15 @@ var TweetsList = function (_Component) {
       socket.on('newData', function (data) {
         _this2.props.dispatch((0, _index.newData)(data));
       });
+
+      socket.on('error', function () {
+        _this2.props.dispatch((0, _index.error)());
+      });
     }
   }, {
     key: 'onUnload',
     value: function onUnload(event) {
-      // socket.emit('stop');
+      socket.emit('stop');
     }
   }, {
     key: 'componentWillUnmount',
@@ -36510,7 +36540,8 @@ var TweetsList = function (_Component) {
         'div',
         { className: 'tweetsContainer' },
         this.props.showData ? _react2.default.createElement(_dataContainer2.default, null) : _react2.default.createElement(_waiting2.default, {
-          show: this.props.search
+          error: this.props.error,
+          show: this.props.showWaiting
         }),
         _react2.default.createElement(_tweets2.default, { tweets: this.props.tweets })
       );
@@ -36555,7 +36586,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var initialState = {
-  data: []
+  data: [],
+  newSearch: false
 };
 
 function data() {
@@ -36566,7 +36598,10 @@ function data() {
     case types.NEW_DATA:
       return (0, _extends3.default)({}, state, { data: [action.data].concat((0, _toConsumableArray3.default)(state.data)) });
     case types.SEARCH_TERM:
-      return (0, _extends3.default)({}, state, { data: [] });
+      return (0, _extends3.default)({}, state, {
+        data: [],
+        newSearch: true
+      });
     default:
       return state;
   }
@@ -36604,7 +36639,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var initialState = {
   tweets: [],
   showData: false,
-  search: false
+  showWaiting: false,
+  error: false
 };
 
 function tweets() {
@@ -36612,18 +36648,31 @@ function tweets() {
   var action = arguments[1];
 
   switch (action.type) {
+
     case types.NEW_TWEET:
       return (0, _extends3.default)({}, state, {
         tweets: [action.tweet].concat((0, _toConsumableArray3.default)(state.tweets))
       });
+
     case types.SEARCH_TERM:
       return (0, _extends3.default)({}, state, {
         tweets: [],
-        showData: false,
-        search: true
+        showWaiting: true
       });
+
     case types.NEW_DATA:
-      return (0, _extends3.default)({}, state, { showData: true });
+      return (0, _extends3.default)({}, state, {
+        showData: true,
+        showWaiting: false
+      });
+
+    case types.ERROR:
+      return (0, _extends3.default)({}, state, {
+        error: true,
+        showData: false,
+        showWaiting: false
+      });
+
     default:
       return state;
   }
@@ -54624,7 +54673,7 @@ exports = module.exports = __webpack_require__(759)();
 
 
 // module
-exports.push([module.i, "html {\n  font-family: 'Raleway', sans-serif;\n  color: #333333; }\n\nmain {\n  margin: 50px; }\n  main .title {\n    font-size: 54px;\n    font-weight: bold;\n    text-transform: uppercase;\n    font-family: 'Montserrat', sans-serif; }\n    main .title span {\n      color: #4add9d; }\n\n@media (max-width: 1425px) {\n  main .title {\n    font-size: 45px; } }\n\n@media (max-width: 1210px) {\n  main {\n    margin: 20px; }\n    main .title {\n      font-size: 35px;\n      text-align: center; } }\n\n@media (max-width: 482px) {\n  main {\n    margin: 10px; } }\n\n@media screen and (max-width: 402px) {\n  main {\n    margin: 5px; }\n    main .title {\n      text-align: center;\n      font-size: 35px; } }\n\n.tweetsContainer {\n  margin-top: 50px;\n  display: flex;\n  justify-content: space-between;\n  flex-direction: row; }\n\n.data {\n  position: absolute;\n  right: -200px;\n  width: 1000px;\n  margin-left: 100px; }\n\n.tweets {\n  width: 500px; }\n  .tweets li {\n    list-style-type: none;\n    padding: 10px; }\n\n@media (max-width: 960px) {\n  .tweetsContainer {\n    flex-direction: column;\n    align-items: center;\n    justify-content: center; }\n  .data {\n    position: static;\n    width: 100%; }\n  .tweets {\n    width: 70%; }\n    .tweets ul {\n      padding-left: 0px; } }\n\n@media (max-width: 722px) {\n  .tweets {\n    width: 80%; } }\n\n@media screen and (max-width: 482px) {\n  .data {\n    margin-left: 20px; }\n  .tweets {\n    margin-top: 30px;\n    width: 100%; } }\n\n.waitingSearch {\n  position: absolute;\n  left: 500px; }\n\n.waiting, .waitingSearch {\n  /* The typing effect */\n  /* The typewriter cursor effect */ }\n  .waiting span, .waitingSearch span {\n    color: #4add9d; }\n  .waiting h1, .waiting h2, .waitingSearch h1, .waitingSearch h2 {\n    overflow: hidden;\n    border-right: 0.15em solid #ffa53c;\n    white-space: nowrap;\n    margin: 0 auto;\n    letter-spacing: .15em;\n    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite; }\n\n@keyframes typing {\n  from {\n    width: 0; }\n  to {\n    width: 100%; } }\n\n@keyframes blink-caret {\n  from, to {\n    border-color: transparent; }\n  50% {\n    border-color: orange; } }\n\n@media (max-width: 1210px) {\n  .waitingSearch {\n    position: static;\n    width: 420px;\n    margin: 0 auto; } }\n\n@media (max-width: 482px) {\n  .waitingSearch {\n    left: 20px;\n    font-size: 16px; } }\n\n@media screen and (max-width: 402px) {\n  .waitingSearch {\n    width: 100%;\n    font-size: 12.5px; } }\n\n.search {\n  width: 400px;\n  margin: 0 auto;\n  margin-bottom: 20px;\n  padding-bottom: 20px; }\n  .search input,\n  .search button {\n    float: left; }\n  .search input[type=\"text\"] {\n    outline: none;\n    box-shadow: none;\n    border-top-left-radius: 20px;\n    border-bottom-left-radius: 20px;\n    border: 1px solid #4add9d;\n    font-size: 30px;\n    text-align: center;\n    color: #333333; }\n  .search button {\n    outline: none;\n    box-shadow: none;\n    border: none;\n    font-size: 21px;\n    padding: 7px 20px;\n    font-family: 'Raleway', sans-serif;\n    background-color: #ffa53c;\n    border-top-right-radius: 20px;\n    border-bottom-right-radius: 20px; }\n\n.danger {\n  text-align: center;\n  color: red; }\n\n@media screen and (max-width: 402px) {\n  .search {\n    width: 100%;\n    margin-bottom: 70px; }\n    .search input[type=\"text\"] {\n      font-size: 23px; }\n    .search button {\n      font-size: 21px;\n      margin-left: -4px;\n      padding: 8px 20px; }\n    .search .danger {\n      left: 10px;\n      text-align: center;\n      font-size: 20px; } }\n", ""]);
+exports.push([module.i, "html {\n  font-family: 'Raleway', sans-serif;\n  color: #333333; }\n\nmain {\n  margin: 50px; }\n  main .title {\n    font-size: 54px;\n    font-weight: bold;\n    text-transform: uppercase;\n    font-family: 'Montserrat', sans-serif; }\n    main .title span {\n      color: #4add9d; }\n\n@media (max-width: 1425px) {\n  main .title {\n    font-size: 45px; } }\n\n@media (max-width: 1210px) {\n  main {\n    margin: 20px; }\n    main .title {\n      font-size: 35px;\n      text-align: center; } }\n\n@media (max-width: 482px) {\n  main {\n    margin: 10px; } }\n\n@media screen and (max-width: 500px) {\n  main {\n    margin: 5px; }\n    main .title {\n      text-align: center;\n      font-size: 35px; } }\n\n.tweetsContainer {\n  margin-top: 50px;\n  display: flex;\n  justify-content: space-between;\n  flex-direction: row; }\n\n.data {\n  position: absolute;\n  right: -200px;\n  width: 1000px;\n  margin-left: 100px; }\n\n.tweets {\n  width: 500px; }\n  .tweets li {\n    list-style-type: none;\n    padding: 10px; }\n\n@media (max-width: 960px) {\n  .tweetsContainer {\n    flex-direction: column;\n    align-items: center;\n    justify-content: center; }\n  .data {\n    position: static;\n    width: 100%; }\n  .tweets {\n    width: 70%; }\n    .tweets ul {\n      padding-left: 0px; } }\n\n@media (max-width: 722px) {\n  .tweets {\n    width: 80%; } }\n\n@media screen and (max-width: 500px) {\n  .data {\n    margin-left: 20px; }\n  .tweets {\n    margin-top: 30px;\n    width: 100%; } }\n\n.waiting, .waitingSearch {\n  display: inline-block;\n  /* The typing effect */\n  /* The typewriter cursor effect */ }\n  .waiting .extra, .waitingSearch .extra {\n    color: #4add9d; }\n  .waiting h1, .waiting h2, .waitingSearch h1, .waitingSearch h2 {\n    overflow: hidden;\n    border-right: 0.15em solid #ffa53c;\n    white-space: nowrap;\n    margin: 0 auto;\n    letter-spacing: .15em;\n    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite; }\n\n@keyframes typing {\n  from {\n    width: 0; }\n  to {\n    width: 100%; } }\n\n@keyframes blink-caret {\n  from, to {\n    border-color: transparent; }\n  50% {\n    border-color: #ffa53c; } }\n\n.error {\n  position: absolute;\n  color: #ffa53c;\n  text-align: center;\n  width: 100%; }\n\n@media (max-width: 1210px) {\n  .error {\n    position: relative; } }\n\n.search {\n  width: 30vw;\n  margin: 0 auto;\n  margin-bottom: 20px;\n  padding-bottom: 60px; }\n  .search input,\n  .search button {\n    float: left; }\n  .search input[type=\"text\"] {\n    outline: none;\n    box-shadow: none;\n    border-top-left-radius: 20px;\n    border-bottom-left-radius: 20px;\n    border: 1px solid #4add9d;\n    font-size: 1.5vw;\n    width: 70%;\n    height: 4vh;\n    text-align: center;\n    color: #333333; }\n  .search button {\n    outline: none;\n    box-shadow: none;\n    border: none;\n    font-size: 2vh;\n    height: 4.5vh;\n    text-align: center;\n    padding: 7px 20px;\n    font-family: 'Raleway', sans-serif;\n    background-color: #ffa53c;\n    border-top-right-radius: 20px;\n    border-bottom-right-radius: 20px; }\n\n.danger {\n  text-align: center;\n  color: red; }\n\n@media screen and (max-width: 600px) {\n  .search {\n    width: 100%;\n    margin-bottom: 30px;\n    margin-left: 0px; }\n    .search button {\n      margin-left: 0px; }\n    .search .danger {\n      left: 0px;\n      text-align: center;\n      font-size: 20px; } }\n", ""]);
 
 // exports
 

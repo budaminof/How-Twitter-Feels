@@ -30,10 +30,4 @@ node_modules
 npm-debug.log
 
 .env
-public/bundle.js
 .tmp/
-
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
