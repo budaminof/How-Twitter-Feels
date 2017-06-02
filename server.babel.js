@@ -2,7 +2,8 @@ const app = require('./app.babel');
 const dotenv = require('dotenv');
 dotenv.load();
 const Twitter = require('twitter');
-const watson = require('watson-developer-cloud');
+const ToneAnalyzerV3 = require('watson-developer-cloud/tone-analyzer/v3');
+
 const server = app.listen(process.env.PORT || 3000);
 const io = require('socket.io')(server);
 
@@ -13,11 +14,10 @@ const client = new Twitter({
   access_token_secret: process.env.ACCESS_TOKEN_SECRET
 });
 
-const tone_analyzer = watson.tone_analyzer({
-  username: process.env.USERNAME,
-  password: process.env.PASSWORD,
-  version: process.env.VERSION,
-  version_date: process.env.VERSION_DATE
+var tone_analyzer = new ToneAnalyzerV3({
+    username: process.env.USERNAME,
+    password: process.env.PASSWORD,
+    version_date: process.env.VERSION_DATE
 });
 
 let hashtags;
