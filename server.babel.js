@@ -15,37 +15,37 @@ const client = new Twitter({
 });
 
 var tone_analyzer = new ToneAnalyzerV3({
-    username: process.env.USERNAME,
-    password: process.env.PASSWORD,
-    version_date: process.env.VERSION_DATE
+  username: process.env.USERNAME,
+  password: process.env.PASSWORD,
+  version_date: process.env.VERSION_DATE
 });
 
-let hashtags;
+let hashtags = "trump";
 let stream;
 
 io.on('connection', (socket) => {
 
   socket.on('newSearch', (newSearchWord) => {
-    hashtags = `#${newSearchWord}`;
-    if (hashtags) {
-      stream = client.stream('statuses/filter', {track: hashtags});
+    // hashtags = `#${newSearchWord}`;
+    // if (hashtags) {
+    stream = client.stream('statuses/filter', { track: hashtags });
 
-      stream.on('data', (tweet) => {
-        io.emit('newTweet', tweet);
-        tone_analyzer.tone({ text: tweet.text },
-          function(err, tone) {
-            if (err) console.log(err);
-            else {
-              io.emit('newData',
+    stream.on('data', (tweet) => {
+      io.emit('newTweet', tweet);
+      tone_analyzer.tone({ text: tweet.text },
+        function (err, tone) {
+          if (err) console.log(err);
+          else {
+            io.emit('newData',
               tone.document_tone.tone_categories[0]);
-            }
+          }
         });
-      });
+    });
 
-      stream.on('error', (error) => {
-        io.emit('error');
-      });
-    }
+    stream.on('error', (error) => {
+      io.emit('error');
+    });
+    // }
   });
 
   socket.on('stop', () => {
