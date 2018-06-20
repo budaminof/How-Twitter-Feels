@@ -7,11 +7,13 @@ class App extends Component {
   render() {
     return (
       <main>
-        <h1 className="title">
-          Hello <span>World</span>, How Are You <span>Feeling</span> Today ?
-        </h1>
-          <Search />
-          <TweetsList />
+        <div className="title">
+          <h1>
+            Hello <span> World</span>, How Are You <span> Feeling</span> Today ?
+          </h1>
+        </div>
+        <Search />
+        <TweetsList />
       </main>
     )
   }

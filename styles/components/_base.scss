@@ -6,48 +6,26 @@ html {
 }
 
 main {
-  margin: 50px;
   .title {
-    font-size: 54px;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-family: 'Montserrat', sans-serif;
+    h1 {
+      font-size: 54px;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+    }
     span {
-      color: $extraColor;
+      color: $accentColor;
     }
   }
 }
 
-@media (max-width:1425px) {
+@media (max-width: 600px) {
   main {
     .title {
-      font-size: 45px;
-    }
-  }
-}
-
-@media (max-width: 1210px) {
-  main {
-    margin: 20px;
-    .title {
-      font-size: 35px;
-      text-align: center;
-    }
-  }
-}
-
-@media (max-width: 482px) {
-  main {
-    margin: 10px;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  main {
-    margin: 5px;
-    .title {
-      text-align: center;
-      font-size: 35px;
+      h1 {
+        font-size: 35px;
+      }
     }
   }
 }

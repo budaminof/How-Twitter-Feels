@@ -14,7 +14,7 @@
     box-shadow: none;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
-    border: 1px solid $extraColor;
+    border: 1px solid $accentColor;
     font-size: 1.5vw;
     width: 70%;
     height: 4vh;
@@ -48,9 +48,6 @@
     width: 100%;
     margin-bottom: 30px;
     margin-left: 0px;
-    input[type="text"] {
-
-    }
     button {
       margin-left: 0px;
     }

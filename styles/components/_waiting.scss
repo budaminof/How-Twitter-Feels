@@ -1,10 +1,11 @@
 @import "colors";
 
-.waiting, .waitingSearch {
+.waitingSearch {
     .extra {
-      color: $extraColor;
+      color: $accentColor;
     }
     display: inline-block;
+    margin-left: 20px;
     h1, h2 {
     overflow: hidden;
     border-right: .15em solid $orange;
