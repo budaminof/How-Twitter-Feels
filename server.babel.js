@@ -20,17 +20,16 @@ var tone_analyzer = new ToneAnalyzerV3({
   version_date: process.env.VERSION_DATE
 });
 
-let hashtags = "trump";
+let hashtags = "#trump";
 let stream;
 
 io.on('connection', (socket) => {
 
-  socket.on('newSearch', (newSearchWord) => {
-    // hashtags = `#${newSearchWord}`;
-    // if (hashtags) {
+  socket.on('newSearch', () => {
     stream = client.stream('statuses/filter', { track: hashtags });
 
     stream.on('data', (tweet) => {
+      console.log('steam on..');
       io.emit('newTweet', tweet);
       tone_analyzer.tone({ text: tweet.text },
         function (err, tone) {
@@ -45,7 +44,6 @@ io.on('connection', (socket) => {
     stream.on('error', (error) => {
       io.emit('error');
     });
-    // }
   });
 
   socket.on('stop', () => {
