@@ -1,15 +1,12 @@
 .tweetsContainer {
   margin-top: 50px;
   display: flex;
-  justify-content: space-between;
-  flex-direction: row;
+  justify-content: space-around;
+  flex-direction: row-reverse;
 }
 
 .data {
-  position: absolute;
-  right: -200px;
   width: 1000px;
-  margin-left: 100px;
 }
 
 .tweets {
@@ -28,7 +25,6 @@
     justify-content: center;
   }
   .data {
-    position: static;
     width: 100%;
   }
   .tweets {
